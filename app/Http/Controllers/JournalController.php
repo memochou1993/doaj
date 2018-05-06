@@ -40,9 +40,11 @@ class JournalController extends Controller
 
         $response = $client->post('journal.test/api/journals/', [
             'form_params' => $request->all()
-        ]);
+        ])->getBody()->getContents();
 
-        return redirect()->route('journals.index');
+        $journal = json_decode($response, true);
+
+        return redirect()->route('journals.show', $journal['id']);
     }
 
     public function show($id)
