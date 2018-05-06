@@ -11,11 +11,38 @@ class JournalController extends Controller
     {
         $client = new Client();
 
-        $data = $client->get('journal.test/api/journals')->getBody();
+        $response = $client->get('journal.test/api/journals')->getBody();
 
-        $journals = json_decode($data, true);
+        $journals = json_decode($response, true);
 
         return view('journals.index', compact('journals'));
+    }
+
+    public function create()
+    {
+        $cores = [
+            'Title' => 'title',
+            'Creator' => 'creator',
+            'Subject' => 'subject',
+            'Publisher' => 'publisher',
+            'Contributor' => 'contributor',
+            'Date' => 'date',
+            'Identifier' => 'identifier',
+            'Language' => 'language',
+        ];
+
+        return view('journals.create', compact('cores'));
+    }
+
+    public function store(Request $request)
+    {
+        $client = new Client();
+
+        $response = $client->post('journal.test/api/journals/', [
+            'form_params' => $request->all()
+        ]);
+
+        return redirect()->route('journals.index');
     }
 
     public function show($id)
@@ -33,9 +60,9 @@ class JournalController extends Controller
 
         $client = new Client();
 
-        $data = $client->get('journal.test/api/journals/'.$id)->getBody();
+        $response = $client->get('journal.test/api/journals/'.$id)->getBody();
 
-        $journal = json_decode($data, true);
+        $journal = json_decode($response, true);
 
         return view('journals.show', compact('cores', 'journal'));
     }
@@ -55,9 +82,9 @@ class JournalController extends Controller
 
         $client = new Client();
 
-        $data = $client->get('journal.test/api/journals/'.$id)->getBody();
+        $response = $client->get('journal.test/api/journals/'.$id)->getBody();
 
-        $journal = json_decode($data, true);
+        $journal = json_decode($response, true);
 
         return view('journals.edit', compact('cores', 'journal'));
     }
@@ -66,10 +93,21 @@ class JournalController extends Controller
     {
         $client = new Client();
 
-        $result = $client->post('journal.test/api/journals/'.$id, [
+        $response = $client->post('journal.test/api/journals/'.$id, [
             'form_params' => $request->all()
         ]);
 
         return redirect()->route('journals.show', $id);
+    }
+
+    public function destroy(Request $request, $id)
+    {
+        $client = new Client();
+
+        $response = $client->post('journal.test/api/journals/'.$id, [
+            'form_params' => $request->all()
+        ]);
+
+        return redirect()->route('journals.index');
     }
 }

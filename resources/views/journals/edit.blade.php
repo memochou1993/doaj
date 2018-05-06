@@ -22,11 +22,10 @@
                         @endforeach
                     </div>
                 </div>
-                <div class="card-divider">
-                    <div class="cell text-center">
-                        <input type="submit" class="button success" value="Save">
-                    </div>
-                </div>
+            </div>
+
+            <div class="text-center">
+                <input type="submit" class="button success" value="Save">
             </div>
         </form>
     @endif

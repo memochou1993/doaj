@@ -12,7 +12,7 @@
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return redirect()->route('journals.index');
 });
 
 Route::resource('/journals', 'JournalController');

@@ -26,21 +26,16 @@
                 </div>
             </div>
 
-            <div class="callout medium">
-                <div class="grid-x">
-                    <div class="cell medium-4 medium-offset-4">
-                        <div class="input-group">
-                            <input type="text" class="input-group-field">
-                            <div class="input-group-button">
-                                <input type="submit" value="Search" class="button">
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            <div class="row column">
+                <hr>
             </div>
     
             <div class="grid-container">
                 @yield('content')
+            </div>
+
+            <div class="row column">
+                <hr>
             </div>
         </div>
     </body>
